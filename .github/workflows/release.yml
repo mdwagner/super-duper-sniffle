@@ -4,8 +4,15 @@ permissions:
   contents: write
 
 on:
-  release:
-    types: [published]
+  push:
+    tags:
+      - "v*.*.*"
+on:
+  push:
+    tags:
+      - "v*.*.*"
+  #release:
+    #types: [published]
   workflow_dispatch:
     branch:
       description: Branch
@@ -74,6 +81,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
+          draft: true
           files: |
             linux-x86_64
             darwin-arm64
