@@ -56,8 +56,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/download-artifact@v4
-      - run: |
-        ls -lAh
+      - name: Output
+        run: |
+          ls -lAh
       #- name: Release
         #uses: softprops/action-gh-release@v1
         #if: startsWith(github.ref, 'refs/tags/')
