@@ -58,7 +58,7 @@ jobs:
       - uses: actions/download-artifact@v4
       - name: Output
         run: |
-          ls -lAh
+          ls -lAh release-*
       #- name: Release
         #uses: softprops/action-gh-release@v1
         #if: startsWith(github.ref, 'refs/tags/')
