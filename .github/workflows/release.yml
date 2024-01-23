@@ -1,0 +1,43 @@
+name: Example Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build-linux-x86_64:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build
+        run: echo "linux-x86_64" > release
+      - uses: actions/upload-artifact@v4
+        with:
+          name: release-linux-x86_64
+          path: release
+          if-no-files-found: error
+
+  build-darwin-arm64:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build
+        run: echo "darwin-arm64" > release
+      - uses: actions/upload-artifact@v4
+        with:
+          name: release-darwin-arm64
+          path: release
+          if-no-files-found: error
+
+  build-windows-x86_64:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build
+        run: |
+          "windows-x86_64" | Out-File -FilePath release
+      - uses: actions/upload-artifact@v4
+        with:
+          name: release-windows-x86_64
+          path: release
+          if-no-files-found: error
