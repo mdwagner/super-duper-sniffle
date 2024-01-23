@@ -1,5 +1,8 @@
 name: Example Release
 
+permissions:
+  contents: write
+
 on:
   release:
     types: [published]
@@ -10,7 +13,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build
-        run: echo "linux-x86_64" > release
+        run: |
+          echo "linux-x86_64" > release
       - uses: actions/upload-artifact@v4
         with:
           name: release-linux-x86_64
@@ -22,7 +26,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build
-        run: echo "darwin-arm64" > release
+        run: |
+          echo "darwin-arm64" > release
       - uses: actions/upload-artifact@v4
         with:
           name: release-darwin-arm64
@@ -41,3 +46,10 @@ jobs:
           name: release-windows-x86_64
           path: release
           if-no-files-found: error
+
+  release-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Example Output
+        run: |
+          echo ${{ github.ref }}
